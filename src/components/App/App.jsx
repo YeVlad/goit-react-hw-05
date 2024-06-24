@@ -10,23 +10,20 @@ import searchTrendingMovie from "../../functions/searchTrendingMovie";
 
 function App() {
   const [trendingMovies, setTrendingMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchTrendingMovies = async () => {
       try {
         setError(false);
-        setLoading(true);
+
         const response = await searchTrendingMovie();
         setTrendingMovies(response.data.results);
         console.log(response.data.results);
-        setLoading(false);
       } catch (error) {
         setError(true);
       }
     };
-
     fetchTrendingMovies();
   }, []);
 
@@ -34,7 +31,10 @@ function App() {
     <>
       <NavBar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home trendingMovies={trendingMovies} error={error} />}
+        />
         <Route path="/movies" element={<Movies />} />
       </Routes>
     </>
