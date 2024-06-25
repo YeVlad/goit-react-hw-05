@@ -10,8 +10,8 @@ export default function Cast() {
     const fetchCast = async () => {
       try {
         const credit = await searchCredits(movieId);
-        setCast(credit);
-        console.log(credit);
+        setCast(credit.data.cast);
+        console.log(credit.data.cast);
       } catch (error) {
         console.log("ops");
       }
@@ -19,6 +19,26 @@ export default function Cast() {
     fetchCast();
   }, []);
   if (cast) {
-    return <ul></ul>;
+    return (
+      <ul className="castUl">
+        {cast.map((person) => {
+          return (
+            <li key={person.id} className="person">
+              <div className="placeForImg">
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${person.profile_path}`}
+                  alt={person.name}
+                  className="personImg"
+                />
+              </div>
+              <p>{person.name}</p>
+              <p>{person.character}</p>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  } else {
+    return <p>No data</p>;
   }
 }
