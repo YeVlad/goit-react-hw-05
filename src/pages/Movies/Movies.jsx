@@ -1,5 +1,6 @@
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import searchMoviesByName from "../../functions/searchMoviesByName";
 
@@ -25,7 +26,11 @@ export default function Movies() {
       {foundMovies.length > 0 && (
         <ul>
           {foundMovies.map((movie) => {
-            return <li key={movie.id}>{movie.original_title}</li>;
+            return (
+              <li key={movie.id}>
+                <Link to={`${movie.id}`}>{movie.original_title}</Link>
+              </li>
+            );
           })}
         </ul>
       )}

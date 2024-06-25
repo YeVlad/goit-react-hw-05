@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import Home from "../../pages/Home/Home";
 import Movies from "../../pages/Movies/Movies";
+import InfoAboutMovie from "../../pages/InfoAboutMovie/InfoAboutMovie";
+import Cast from "../Cast/Cast";
+import Review from "../Review/Review";
 
 import searchTrendingMovie from "../../functions/searchTrendingMovie";
 
@@ -19,7 +22,6 @@ function App() {
 
         const response = await searchTrendingMovie();
         setTrendingMovies(response.data.results);
-        console.log(response.data.results);
       } catch (error) {
         setError(true);
       }
@@ -36,6 +38,18 @@ function App() {
           element={<Home trendingMovies={trendingMovies} error={error} />}
         />
         <Route path="/movies" element={<Movies />} />
+        <Route path="/movies/:movieId" element={<InfoAboutMovie />}>
+          <Route path="cast" element={<Cast />} />
+          <Route path="review" element={<Review />} />
+        </Route>
+        <Route
+          path="*"
+          element={
+            <div>
+              <p>Problem</p>
+            </div>
+          }
+        />
       </Routes>
     </>
   );
