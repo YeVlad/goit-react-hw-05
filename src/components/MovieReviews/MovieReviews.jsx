@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import searchReview from "../../functions/searchReview";
 
-export default function Review() {
+export default function MovieReviews() {
   const [reviews, setReviews] = useState(0);
   const { movieId } = useParams();
 

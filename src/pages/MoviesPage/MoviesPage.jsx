@@ -1,10 +1,10 @@
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 import searchMoviesByName from "../../functions/searchMoviesByName";
+import MovieList from "../../components/MovieList/MovieList";
 
-export default function Movies() {
+export default function MoviesPage() {
   const [foundMovies, setFoundMovies] = useState([]);
 
   async function handleSubmit(values, actions) {
@@ -23,17 +23,7 @@ export default function Movies() {
   return (
     <>
       <SearchBar handleSubmit={handleSubmit} />
-      {foundMovies.length > 0 && (
-        <ul>
-          {foundMovies.map((movie) => {
-            return (
-              <li key={movie.id}>
-                <Link to={`${movie.id}`}>{movie.original_title}</Link>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      {foundMovies.length > 0 && <MovieList Movies={foundMovies} />}
     </>
   );
 }
