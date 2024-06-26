@@ -17,7 +17,7 @@ export default function MovieCast() {
       }
     };
     fetchCast();
-  }, []);
+  }, [movieId]);
   if (cast) {
     return (
       <ul className="castUl">

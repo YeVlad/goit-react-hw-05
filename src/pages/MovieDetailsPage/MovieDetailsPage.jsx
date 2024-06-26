@@ -1,6 +1,7 @@
-import { Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import searchMoviesById from "../../functions/searchMoviesById";
+import { useRef } from "react";
 
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
@@ -12,6 +13,9 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  const lastPlace = useLocation();
+  const savedPlace = useRef(lastPlace.state ?? "/");
+  console.log(savedPlace);
   useEffect(() => {
     const fetchIdMovies = async () => {
       try {
@@ -29,6 +33,7 @@ export default function MovieDetailsPage() {
   if (movie) {
     return (
       <>
+        <Link to={savedPlace.current}>Back</Link>
         <InfoAbout film={movie.data} />
         <AdditionalLinks />
         <Outlet />
