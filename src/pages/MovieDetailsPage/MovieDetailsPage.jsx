@@ -15,7 +15,6 @@ export default function MovieDetailsPage() {
 
   const lastPlace = useLocation();
   const savedPlace = useRef(lastPlace.state ?? "/");
-  console.log(savedPlace);
   useEffect(() => {
     const fetchIdMovies = async () => {
       try {
@@ -29,7 +28,7 @@ export default function MovieDetailsPage() {
       }
     };
     fetchIdMovies();
-  }, []);
+  }, [movieId]);
   if (movie) {
     return (
       <>

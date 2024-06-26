@@ -1,10 +1,10 @@
 import { Formik, Form, Field } from "formik";
 
-export default function SearchBar({ handleSubmit }) {
+export default function SearchBar({ handleSubmit, value }) {
   return (
     <Formik
       initialValues={{
-        searchWord: "",
+        searchWord: value,
       }}
       onSubmit={handleSubmit}
     >
